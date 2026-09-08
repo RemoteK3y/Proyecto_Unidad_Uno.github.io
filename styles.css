@@ -1,0 +1,305 @@
+/* --------------------------------------------------------------
+   Tokens
+   Fondo tinta-noche + acento ámbar (rueda de cifrado / disco de latón),
+   tipografía mono para código y datos, Inter para lectura.
+----------------------------------------------------------------- */
+:root {
+  --bg: #12141c;
+  --panel: #1a1d29;
+  --panel-raised: #20232f;
+  --line: #2a2e3d;
+  --text: #e4e6eb;
+  --text-muted: #8a8f9c;
+  --amber: #e8a33d;
+  --amber-dim: #b9822f;
+  --green: #4fbf8b;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+button, textarea, input { font-family: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* --------------------------------------------------------------
+   Encabezado
+----------------------------------------------------------------- */
+.topbar {
+  border-bottom: 1px solid var(--line);
+  padding: 20px 28px;
+  background: linear-gradient(180deg, #15171f 0%, var(--bg) 100%);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: var(--amber);
+}
+
+.repo-path {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.repo-owner { color: var(--text-muted); }
+.repo-sep { color: var(--text-muted); margin: 0 2px; }
+.repo-name { color: var(--text); }
+
+.brand-tagline {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* --------------------------------------------------------------
+   Layout general
+----------------------------------------------------------------- */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  max-width: 1180px;
+  margin: 28px auto;
+  padding: 0 28px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+}
+
+/* --------------------------------------------------------------
+   Rail de equipos (estilo lista de ramas)
+----------------------------------------------------------------- */
+.rail-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 10px 4px;
+  letter-spacing: 0.02em;
+}
+
+.team-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.team-item { border-radius: 6px; }
+
+.team-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  border-left: 3px solid transparent;
+  color: var(--text-muted);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.team-btn:hover { background: var(--panel); color: var(--text); }
+
+.team-item.active .team-btn {
+  background: var(--panel);
+  color: var(--text);
+  border-left-color: var(--amber);
+  font-weight: 600;
+}
+
+.team-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+.team-dot.has-code { background: var(--green); }
+
+/* --------------------------------------------------------------
+   Área de trabajo
+----------------------------------------------------------------- */
+.workspace { min-width: 0; }
+
+.file-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.tab:hover { color: var(--text); }
+
+.tab.active {
+  color: var(--amber);
+  border-bottom-color: var(--amber);
+}
+
+.code-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.code-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.active-filename { color: var(--text); }
+.publish-status { color: var(--text-muted); }
+
+.code-block {
+  margin: 0;
+  max-height: 460px;
+  overflow: auto;
+  padding: 18px;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 0.87rem;
+  line-height: 1.55;
+  background: transparent !important;
+}
+
+/* --------------------------------------------------------------
+   Panel de publicación
+----------------------------------------------------------------- */
+.publish-panel {
+  margin-top: 20px;
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+
+.publish-panel h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.hint {
+  margin: 0 0 12px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.hint code {
+  font-family: var(--font-mono);
+  background: var(--panel);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+#publish-textarea {
+  width: 100%;
+  min-height: 160px;
+  resize: vertical;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.publish-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #14120b;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-primary:hover { background: var(--amber-dim); }
+
+.publish-feedback {
+  color: var(--green);
+  font-size: 0.88rem;
+}
+
+/* Botón secundario ("Restablecer todo") para la versión estática */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--amber-dim);
+}
